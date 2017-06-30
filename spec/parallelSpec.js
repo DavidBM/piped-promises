@@ -215,6 +215,35 @@ describe('Parallel', function() {
 	});
 
 	it('should return an array with the result in order', function() {
-		
+		var cbFactory = (time) => {
+			return function cb() {
+				return new Promise((resolve) => {
+					setTimeout(() => {
+						resolve(time);
+					}, time);
+				});
+			};
+		};
+
+		var cb1 = cbFactory(120);
+		var cb2 = cbFactory(110);
+		var cb3 = cbFactory(100);
+
+		var cb4 = cbFactory(1);
+		var cb5 = cbFactory(10);
+		var cb6 = cbFactory(20);
+
+		Piped.parallel([cb1, cb2, cb3, cb4, cb5, cb6])
+		.then((results) => {
+			expect(results[0]).toBe(1);
+			expect(results[1]).toBe(10);
+			expect(results[2]).toBe(20);
+
+			expect(results[3]).toBe(100);
+			expect(results[4]).toBe(110);
+			expect(results[5]).toBe(120);
+
+			done();
+		});
 	});
 });
