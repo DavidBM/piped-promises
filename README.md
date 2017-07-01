@@ -1,12 +1,22 @@
 # piped-promises
 Library with different patters for promises
 
+<!-- MarkdownTOC autolink=true autoanchor=true bracket=round depth=0 -->
+
+- [Patters](#patters)
+	- [Sequential promises - Low level method](#sequential-promises---low-level-method)
+	- [Parallel promises - Low level method](#parallel-promises---low-level-method)
+
+<!-- /MarkdownTOC -->
+
+<a name="patters"></a>
 ## Patters
 
 The library is structure in a sequence of static methods like `parallel` or `secuencial`.
 
 The usage is simple, just import the library and use the methods. 
 
+<a name="sequential-promises---low-level-method"></a>
 ### Sequential promises - Low level method
 
 Execute the promises one after the other, always waiting to the previous one to finish before executing the next Promise.
@@ -27,6 +37,7 @@ Execute the promises one after the other, always waiting to the previous one to 
 
 In case of **error** the execution will stop and the error will be available in the `sequential` catch.
 
+<a name="parallel-promises---low-level-method"></a>
 ### Parallel promises - Low level method
 
 Execute all promises and return an array with the results of all the promises. Is like a Promise.all but accepts a maximum quantity of maximum executions in parallel.
