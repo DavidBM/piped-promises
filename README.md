@@ -66,9 +66,17 @@ Is important to make a distinction between this method and the ones that use Pro
 To have an API like:
 
 ```javascript
-piped.iterate(urls).inParallel(10, url => request(url, options));
+piped
+.iterate(urls)
+.inParallel(10, url => request(url, options))
+.then(results => {...})
+.catch(error => {...});
 ``` 
 
 ```javascript
-piped.iterate(urls).sequentially((url, lastValue) => request(url, options));
+piped
+.iterate(urls)
+.sequentially((url, lastValue) => request(url, options))
+.then(results => {...})
+.catch(error => {...});
 ``` 
