@@ -1,7 +1,7 @@
 {
   "name": "piped-promises",
-  "description": "Library with different patters for promises like sequencial & parallel with maximum parallel execution arguments",
-  "version": "0.0.1",
+  "description": "Library with different patters for promises like sequencial & parallel with maximum parallel execution arguments execution",
+  "version": "1.0.0",
   "main": "index.js",
   "scripts": {
     "test": "NODE_ENV=test ./node_modules/.bin/istanbul cover -x \"**/spec/**\" ./node_modules/.bin/jasmine"

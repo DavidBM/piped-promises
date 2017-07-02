@@ -1,11 +1,15 @@
 # piped-promises
-Library with different patters for promises
+
+**Library with different patters for promises**
+
+<img src="resources/pipe.png">
 
 <!-- MarkdownTOC autolink=true autoanchor=true bracket=round depth=0 -->
 
 - [Patters](#patters)
-	- [Sequential promises - Low level method](#sequential-promises---low-level-method)
-	- [Parallel promises - Low level method](#parallel-promises---low-level-method)
+	- [Sequential promises](#sequential-promises)
+	- [Parallel promises](#parallel-promises)
+- [TODO](#todo)
 
 <!-- /MarkdownTOC -->
 
@@ -16,8 +20,8 @@ The library is structure in a sequence of static methods like `parallel` or `sec
 
 The usage is simple, just import the library and use the methods. 
 
-<a name="sequential-promises---low-level-method"></a>
-### Sequential promises - Low level method
+<a name="sequential-promises"></a>
+### Sequential promises
 
 Execute the promises one after the other, always waiting to the previous one to finish before executing the next Promise.
 
@@ -37,8 +41,8 @@ Execute the promises one after the other, always waiting to the previous one to 
 
 In case of **error** the execution will stop and the error will be available in the `sequential` catch.
 
-<a name="parallel-promises---low-level-method"></a>
-### Parallel promises - Low level method
+<a name="parallel-promises"></a>
+### Parallel promises
 
 Execute all promises and return an array with the results of all the promises. Is like a Promise.all but accepts a maximum quantity of maximum executions in parallel.
 
@@ -56,3 +60,15 @@ Execute all promises and return an array with the results of all the promises. I
 
 Is important to make a distinction between this method and the ones that use Promise.all internally. This one executes the next call just after one call is finish meanwhile other methods execute X callbacks with Promise.all, waiting until the last one to continue the execution, making that methods less time efficient.
 
+<a name="todo"></a>
+## TODO
+
+To have an API like:
+
+```javascript
+piped.iterate(urls).inParallel(10, url => request(url, options));
+``` 
+
+```javascript
+piped.iterate(urls).sequentially((url, lastValue) => request(url, options));
+``` 
