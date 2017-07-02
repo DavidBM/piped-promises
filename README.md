@@ -1,7 +1,8 @@
 # piped-promises
 
 **Library with different patters for promises** like sequencial & parallel with maximum parallel execution arguments execution.
-[![Coverage Status](https://coveralls.io/repos/DavidBM/piped-promises/badge.svg?branch=master)](https://coveralls.io/r/DavidBM/piped-promises?branch=master)
+
+[![Build Status](https://travis-ci.org/DavidBM/piped-promises.svg?branch=master)](https://travis-ci.org/DavidBM/piped-promises) [![Coverage Status](https://coveralls.io/repos/DavidBM/piped-promises/badge.svg?branch=master)](https://coveralls.io/r/DavidBM/piped-promises?branch=master)
 
 <img src="resources/pipe.png">
 
@@ -17,7 +18,7 @@
 <a name="patters"></a>
 ## Patters
 
-The library is structure in a sequence of static methods like `parallel` or `secuencial`.
+The library is structured in a sequence of static methods like `parallel` or `secuencial`.
 
 The usage is simple, just import the library and use the methods. 
 
