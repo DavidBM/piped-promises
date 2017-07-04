@@ -1,22 +1,22 @@
 describe('Sequential', function() {
-	var Piped;
+	var sequential;
 
 	beforeEach(function() {
-		Piped = require('../lib/lib.js');
+		sequential = require('../lib/sequential.js');
 	});
 
 	it('is a function', function() {
-		expect(typeof Piped.sequential).toBe('function');
+		expect(typeof sequential).toBe('function');
 	});
 
 	it('should return a promise', function() {
-		var promise = Piped.sequential();
+		var promise = sequential();
 
 		expect(Promise.resolve(promise)).toBe(promise);
 	});
 
 	it('should return a promise that resolves with an array with the same length than the entered array', function(done) {
-		var promise = Piped.sequential([1, 2, 3]);
+		var promise = sequential([1, 2, 3]);
 
 		promise.then((value) => {
 			expect(value.length).toBe(3);
@@ -25,11 +25,11 @@ describe('Sequential', function() {
 	});
 
 	it('should throw an error if the input is not an array', function() {
-		expect(() => Piped.sequential(NaN)).toThrow(new Error('Input must be an array'));
+		expect(() => sequential(NaN)).toThrow(new Error('Input must be an array'));
 	});
 
 	it('should return a promise that resolves with an empty array is there is no argument suplied', function(done) {
-		var promise = Piped.sequential();
+		var promise = sequential();
 
 		promise.then((value) => {
 			expect(value.length).toBe(0);
@@ -55,7 +55,7 @@ describe('Sequential', function() {
 		var cb2 = cbFactory(10);
 		var cb3 = cbFactory(1);
 
-		Piped.sequential([cb1, cb2, cb3])
+		sequential([cb1, cb2, cb3])
 		.then(() => {
 			expect(executedPromises[0]).toBe(cb1);
 			expect(executedPromises[1]).toBe(cb2);
@@ -74,7 +74,7 @@ describe('Sequential', function() {
 		var cb2 = cbFactory('promise2');
 		var cb3 = cbFactory('promise3');
 
-		Piped.sequential([cb1, cb2, cb3])
+		sequential([cb1, cb2, cb3])
 		.then((result) => {
 			expect(result[0]).toBe('promise1');
 			expect(result[1]).toBe('promise2');
@@ -93,7 +93,7 @@ describe('Sequential', function() {
 		var cb2 = cbFactory('promise2');
 		var cb3 = cbFactory('promise3');
 
-		Piped.sequential([cb1, cb2, cb3])
+		sequential([cb1, cb2, cb3])
 		.then((result) => {
 			expect(result[0]).toBe('promise1');
 			expect(result[1]).toBe('promise2');

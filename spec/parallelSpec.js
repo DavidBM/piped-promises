@@ -1,22 +1,22 @@
 describe('Parallel', function() {
-	var Piped;
+	var parallel;
 
 	beforeEach(function() {
-		Piped = require('../lib/lib.js');
+		parallel = require('../lib/parallel');
 	});
 
 	it('is a function', function() {
-		expect(typeof Piped.parallel).toBe('function');
+		expect(typeof parallel).toBe('function');
 	});
 
 	it('should return a promise', function() {
-		var promise = Piped.parallel();
+		var promise = parallel();
 
 		expect(Promise.resolve(promise)).toBe(promise);
 	});
 
 	it('should return a promise that resolves with an array with the same length than the entered array', function(done) {
-		var promise = Piped.parallel([1, 2, 3]);
+		var promise = parallel([1, 2, 3]);
 
 		promise.then((value) => {
 			expect(value.length).toBe(3);
@@ -25,11 +25,11 @@ describe('Parallel', function() {
 	});
 
 	it('should throw an error if the input is not an array', function() {
-		expect(() => Piped.parallel(NaN)).toThrow(new Error('Input must be an array'));
+		expect(() => parallel(NaN)).toThrow(new Error('Input must be an array'));
 	});
 
 	it('should return a promise that resolves with an empty array is there is no argument suplied', function(done) {
-		var promise = Piped.parallel();
+		var promise = parallel();
 
 		promise.then((value) => {
 			expect(value.length).toBe(0);
@@ -38,7 +38,7 @@ describe('Parallel', function() {
 	});
 
 	it('should expect a number as a second argument', function() {
-		expect(() => Piped.parallel([], NaN)).toThrow(new Error('Second argument is a number: The maximum parallel execution'));
+		expect(() => parallel([], NaN)).toThrow(new Error('Second argument is a number: The maximum parallel execution'));
 	});
 
 	it('should call all the callbacks of the array immediately', function(done) {
@@ -59,7 +59,7 @@ describe('Parallel', function() {
 		var cb2 = cbFactory(10);
 		var cb3 = cbFactory(1);
 
-		Piped.parallel([cb1, cb2, cb3])
+		parallel([cb1, cb2, cb3])
 		.then(() => {
 			expect(executedPromises[0]).toBe(cb3);
 			expect(executedPromises[1]).toBe(cb2);
@@ -91,7 +91,7 @@ describe('Parallel', function() {
 		var cb5 = cbFactory(60);
 		var cb6 = cbFactory(20);
 
-		Piped.parallel([cb1, cb2, cb3, cb4, cb5, cb6], 3)
+		parallel([cb1, cb2, cb3, cb4, cb5, cb6], 3)
 		.then(() => {
 			expect(executedPromises[0]).toBe(50);
 			expect(executedPromises[1]).toBe(1);
@@ -127,7 +127,7 @@ describe('Parallel', function() {
 		var cb5 = cbFactory(10);
 		var cb6 = cbFactory(20);
 
-		Piped.parallel([cb1, cb2, cb3, cb4, cb5, cb6])
+		parallel([cb1, cb2, cb3, cb4, cb5, cb6])
 		.then(() => {
 			expect(executedPromises[0]).toBe(1);
 			expect(executedPromises[1]).toBe(10);
@@ -163,7 +163,7 @@ describe('Parallel', function() {
 		var cb5 = cbFactory(10);
 		var cb6 = cbFactory(20);
 
-		Piped.parallel([cb1, cb2, cb3, cb4, cb5, cb6])
+		parallel([cb1, cb2, cb3, cb4, cb5, cb6])
 		.then(() => {
 			expect(executedPromises[0]).toBe(1);
 			expect(executedPromises[1]).toBe(10);
@@ -204,7 +204,7 @@ describe('Parallel', function() {
 		var cb5 = cbFactory(50);
 		var cb6 = cbFactory(20);
 
-		Piped.parallel([cb1, cb2, cb3, cb4, cb5, cb6], 3)
+		parallel([cb1, cb2, cb3, cb4, cb5, cb6], 3)
 		.then(() => {})
 		.catch(() => {});
 
@@ -214,7 +214,7 @@ describe('Parallel', function() {
 		}, 200);
 	});
 
-	it('should return an array with the result in order', function() {
+	it('should return an array with the result in order', function(done) {
 		var cbFactory = (time) => {
 			return function cb() {
 				return new Promise((resolve) => {
@@ -233,7 +233,7 @@ describe('Parallel', function() {
 		var cb5 = cbFactory(10);
 		var cb6 = cbFactory(20);
 
-		Piped.parallel([cb1, cb2, cb3, cb4, cb5, cb6])
+		parallel([cb1, cb2, cb3, cb4, cb5, cb6])
 		.then((results) => {
 			expect(results[0]).toBe(1);
 			expect(results[1]).toBe(10);

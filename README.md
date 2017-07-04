@@ -66,7 +66,10 @@ Is important to make a distinction between this method and the ones that use Pro
 <a name="todo"></a>
 ## TODO
 
-To have an API like:
+- Accept non-promises as a return of the callbacks (automatically execute the next one)
+- move the code to interators
+- add methods assuming an iterator (like collect, next, etc)
+- To have an API like:
 
 ```javascript
 piped
