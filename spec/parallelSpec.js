@@ -214,7 +214,7 @@ describe('Parallel', function() {
 		}, 200);
 	});
 
-	it('should return an array with the result in order', function() {
+	it('should return an array with the result in order', function(done) {
 		var cbFactory = (time) => {
 			return function cb() {
 				return new Promise((resolve) => {
@@ -235,13 +235,13 @@ describe('Parallel', function() {
 
 		Piped.parallel([cb1, cb2, cb3, cb4, cb5, cb6])
 		.then((results) => {
-			expect(results[0]).toBe(1);
-			expect(results[1]).toBe(10);
-			expect(results[2]).toBe(20);
+			expect(results[0]).toBe(120);
+			expect(results[1]).toBe(110);
+			expect(results[2]).toBe(100);
 
-			expect(results[3]).toBe(100);
-			expect(results[4]).toBe(110);
-			expect(results[5]).toBe(120);
+			expect(results[3]).toBe(1);
+			expect(results[4]).toBe(10);
+			expect(results[5]).toBe(20);
 
 			done();
 		});
