@@ -52,7 +52,7 @@ Execute all promises and return an array with the results of all the promises. I
 ```javascript
 	var piped = require('piped-promises');
 
-	piped.parallel(urls.map(url => {
+	piped.parallelt(urls.map(url => {
 		return (lastCallResult) => request_external_resource(url);
 	}), 10) //Executes a maximum of 10 calls at a time. When one call ends, call the next one
 	.catch(error => console.log(error))
