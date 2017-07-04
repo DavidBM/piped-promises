@@ -31,9 +31,7 @@ Execute the promises one after the other, always waiting to the previous one to 
 ```javascript
 	var piped = require('piped-promises');
 
-	piped.sequential(urls.map(url => {
-		return (lastCallResult) => request_external_resource(url);
-	}))
+	piped.sequential(urls.map(url => (lastCallResult) => request(url)))
 	.catch(error => console.log(error))
 	.then(callResults => {
 		console.log(callResults); //An array with the results of the urls in the same order
@@ -52,9 +50,7 @@ Execute all promises and return an array with the results of all the promises. I
 ```javascript
 	var piped = require('piped-promises');
 
-	piped.parallelt(urls.map(url => {
-		return (lastCallResult) => request_external_resource(url);
-	}), 10) //Executes a maximum of 10 calls at a time. When one call ends, call the next one
+	piped.parallel(urls.map(url => () => request(url)), 10) //Executes a maximum of 10 calls at a time. When one call ends, call the next one
 	.catch(error => console.log(error))
 	.then(callResults => {
 		console.log(callResults); //An array with the results of the urls in the same order
@@ -71,7 +67,7 @@ To have an API like:
 ```javascript
 piped
 .iterate(urls)
-.inParallel(10, url => request(url, options))
+.parallel(10, url => request(url, options))
 .then(results => {...})
 .catch(error => {...});
 ``` 
@@ -79,7 +75,7 @@ piped
 ```javascript
 piped
 .iterate(urls)
-.sequentially((url, lastValue) => request(url, options))
+.sequential((url, lastValue) => request(url, options))
 .then(results => {...})
 .catch(error => {...});
 ``` 
