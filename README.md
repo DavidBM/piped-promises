@@ -1,5 +1,8 @@
 # piped-promises
 
+# Not maintained
+The project is tested and should work properly, but is not going to be maintained. You can check [this one, iterated-pipes](https://github.com/DavidBM/iterated-pipes)
+
 **Library with different patters for promises** like sequencial & parallel with maximum parallel execution arguments execution.
 
 [![Build Status](https://travis-ci.org/DavidBM/piped-promises.svg?branch=master)](https://travis-ci.org/DavidBM/piped-promises)
